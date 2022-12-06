@@ -1,5 +1,9 @@
 # ParkFront
 
+CRUD de una tabla de la base de datos desarrollada en ORACLE.
+
+[Backend](https://github.com/cgrisales04/parques) Desarrollado en Laravel el Backend
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 
 ## Development server

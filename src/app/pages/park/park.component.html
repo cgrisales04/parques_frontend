@@ -1,0 +1,76 @@
+<div class="row m-2">
+    <div class="card mb-5 p-3" style="box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);">
+        <h2>Formulario de parques</h2>
+        <p>
+            Bienvenido al formulario de parques, aquí podras crear,
+            modificar y seleccionar los parques.
+        </p>
+    </div>
+
+    <div class="col-md-6">
+        <form [formGroup]="form_park" (ngSubmit)="swhicheAccion()">
+            <div class="mb-3">
+                <label for="txtNombreParques" class="form-label">Nombre parques:</label>
+                <input type="text" formControlName="nombre_parques" class="form-control" id="txtNombreParques">
+                <div *ngIf="isValid('nombre_parques')" class="form-text text-danger">
+                    Nombre del parque es obligatorio
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="txtDireccion" class="form-label">Dirrecion:</label>
+                <input type="text" formControlName="direccion_parques" class="form-control" id="txtDireccion">
+                <div *ngIf="isValid('direccion_parques')" class="form-text text-danger">
+                    Direccion del parque es obligatorio
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="txtTelefono" class="form-label">Telefono:</label>
+                <input type="text" formControlName="telefono_parques" class="form-control" id="txtTelefono">
+                <div *ngIf="isValid('telefono_parques')" class="form-text text-danger">
+                    Telefono del parque es obligatorio
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="txtMunicipios" class="form-label">Municipios:</label><br>
+                <select class="form-select" formControlName="codigo_municipios">
+                    <option value="0" disabled selected>Municipios</option>
+                    <option *ngFor="let municipio of this._municipios" [value]="municipio.codigo_municipios">
+                        {{municipio.nombre_municipios}}</option>
+                </select>
+                <div *ngIf="isValid('codigo_municipios')" class="form-text text-danger">
+                    Municipio del parque es obligatorio
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success me-2" [disabled]="form_park.invalid">{{this.accion}}</button>
+            <span class="btn btn-danger" (click)="cancelar()">Cancelar</span>
+        </form>
+
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr class="table-success">
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let park of this._park">
+                    <th scope="row">{{park.codigo_parques}}</th>
+                    <th scope="row">{{park.nombre_parques}}</th>
+                    <th scope="row">{{park.direccion_parques}}</th>
+                    <th scope="row">{{park.telefono_parques}}</th>
+                    <th scope="row">
+                        <i class="fa-solid fa-pen me-3" style="cursor: pointer"
+                            (click)="selectPark(park.codigo_parques)"></i>
+                        <i class="fa-solid fa-trash" style="cursor: pointer"
+                            (click)="deletePark(park.codigo_parques)"></i>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
